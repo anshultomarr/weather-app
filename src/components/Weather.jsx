@@ -62,13 +62,20 @@ const Weather = () => {
     }
     useEffect(()=>{
         getData("Delhi");
-    },[])
+    },[]);
+
+    const handleKeyDown = (e)=>{
+        if(e.key === "Enter"){
+            getData(ref.current.value);
+            ref.current.value = '';
+        }
+    }
 
   return (
     <div className='relative bg-zinc-600 w-full h-screen flex justify-center items-center'>
         <div className="container bg-zinc-700 w-100 h-120 rounded-2xl p-10 flex flex-col items-center">
             <div className='w-full flex items-center gap-3'>
-                <input ref={ref} className='bg-zinc-400 border-0 outline-0 pl-2 rounded-md h-8 text-zinc-800 w-70 ' type="text" placeholder='Enter City' />
+                <input ref={ref} className='bg-zinc-400 border-0 outline-0 pl-2 rounded-md h-8 text-zinc-800 w-70 ' type="text" placeholder='Enter City' onKeyDown={handleKeyDown}/>
                 <img src={searchIcon} alt="search icon" className='h-8 w-8 cursor-pointer' onClick={()=>{getData(ref.current.value);
                   ref.current.value = ''}} />
             </div>
